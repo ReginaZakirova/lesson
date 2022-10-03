@@ -71,12 +71,12 @@ echo fibo(17);
 
 echo "<br><br>Слайд 14, Задание 7".'<br>';
 function fiboRekurs($n, $f1=0, $f2=1){
-    if ($n < 1) return $f2;
+    if ($n < 3) return $f2;
     $fn = $f2+$f1;
     return fiboRekurs($n-1,$f2,$fn);
 }
 
-echo fiboRekurs(15);
+echo fiboRekurs(17);
 
 echo "<br><br>Слайд 15, Задание 1".'<br>';
 function randNum($array){
