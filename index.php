@@ -1,4 +1,36 @@
 <?php
+/*function compareLesson10()
+{
+    $x = 100;
+    $y = 200;
+    if ($x > $y) {
+        return $x;
+    } else {
+        return $y;
+    }
+}
+    $result = compareLesson10();
+    echo $result;*/
+
+/*function hypotenuseLesson10($x, $y)
+{
+$h = ($x*$x) + ($y*$y);
+return $h = sqrt($h);
+}
+$xMain = 3;
+$yMain = 4;
+$h = hypotenuseLesson10($xMain, $yMain);
+echo $h;*/
+
+function limitLesson10($xMain){
+while ($xMain<1000000){
+   $xMain = $xMain * 10;
+    echo $xMain . " ";
+}
+echo 'достигли предел в 1000000';
+}
+limitLesson10(10);
+
 /*
 
 Слайд 13
@@ -42,4 +74,4 @@
 2. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая определит количество слов строке.
 3. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выведет в обратном порядке буквы («XIRTIB ,PHP … »).
 4.Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выводит на экран длину строки.
-5. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выводит каждую букву на новую строку
+5. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выводит каждую букву на новую строку*/
