@@ -119,7 +119,4 @@ function brWords($stroka){
     }
 }
 brWords('HTML, CSS, PHP, BITRIX');
-
-$str = htmlentities(file_get_contents("../index.php"));
-echo $str;
 ?>
