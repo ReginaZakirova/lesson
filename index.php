@@ -1,138 +1,126 @@
+Задание 15 - 1
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form name="one" action="" method="get">
+    <p>
+        Login: <input type="text" name="login">
+    </p>
+    <p>
+        <textarea name="comment" id="" cols="30" rows="10"></textarea>
+    </p>
+    <p>
+        <input type="radio" name="getpost" value="get">Get
+        <input type="radio" name="getpost" value="post">Post
+    </p>
+    <p>
+        <input type="checkbox" name="html" value="html">HTML
+        <input type="checkbox" name="html" value="php">PHP
+        <input type="checkbox" name="html" value="git">GIT
+    </p>
+    <p>
+        <button type="submit"> Send! </button>
+    </p>
+</form>
+<?php
+print_r($_GET);
+?>
+<br><br>
+<hr>
+<br>
+
+Задание 15 -2
+<form name="two" action="" method="post">
+    <p>
+        Login: <input type="text" name="login">
+    </p>
+    <p>
+        Password: <input type="password" name="password">
+    </p>
+    <p>
+        <button type="submit"> Send! </button>
+    </p>
+</form>
+<?php
+$_POST['password'] = md5($_POST['password']);
+echo "<br>Имя пользователя: " . $_POST['login'] . "<br>";
+?>
+<br>
+<hr>
+<br>
+
+Задание 15 - 3
+<form name="three" action="" method="post">
+    <p>
+        <label>
+            Login:
+        </label>
+        <select name="login">
+            <option value="john">John</option>
+            <option value="mike">Mike</option>
+            <option value="peter">Peter</option>
+        </select>
+    </p>
+    <p>
+        Password: <input name="passwd" type="password">
+    </p>
+    <p>
+        <button type="submit">Send!</button>
+    </p>
+</form>
+<?php
+    $arr_passwd = [
+            "john" => "202cb962ac59075b964b07152d234b70", // md5-хэш для пароля 123
+            "mike" => "250cf8b51c773f3f8dc8b4be867a9a02", // md5-хэш для пароля 456
+            "peter" => "68053af2923e00204c3ca7c6a3150cf7" // md5-хэш для пароля 789
+    ];
+    if ($arr_passwd[$_POST['login']] == md5($_POST['passwd'])) {
+        echo "Доступ к секретным страницам открыт! <br>";
+    }
+?>
+<br>
+<hr>
+<br>
+
+Задание 15 - 4
+<form name="four" action="phpcourse.php" method="get">
+    <p>
+        <label>
+            Лабораторная работа:
+        </label>
+        <select name="l">
+            <option value="1">Лаб1</option>
+            <option value="2">Лаб2</option>
+            <option value="3">Лаб3</option>
+            <option value="4">Лаб4</option>
+        </select>
+    </p>
+    <p>
+        <button type="submit">Send!</button>
+    </p>
+</form>
+
+</body>
+</html>
+
 <?php
 /*
-
-Слайд 13
-1. Создать функцию, которая сравнивает два числа и возвращает наибольшее.
-1. Объявить функции
-2. В функции объявить 2 переменные, присвоить им значения
-3. Задать конструкцию if
-4. Не забыть про return */
-echo "<br>Задание 1 <br>";
-function firstTaskLesson10() {
-    $a = 10;
-    $b = 5;
-    if ($a > $b) {
-        return $a;
-    }
-    else {
-        return $b;
-    }
-}
-$result = firstTaskLesson10();
-echo $result . "<br>";
-
-/*
-2. Создать функцию, которая принимает длину двух катетов и возвращает значение гипотенузы прямоугольного треугольника.
-1. Объявить функции
-2. Во входных параметрах должны быть 2 переменные - катеты
-3. Вспомнить теорему Пифагора
-4. По теореме Пифагора вычислить гипотенузу и вернуть ее */
-echo "<br>Задание 2 <br>";
-function secondTaskLesson10($a, $b) {
-    $c = sqrt($a * $a + $b *  $b);
-    return $c;
-}
-echo "Гипотенуза = " . secondTaskLesson10(3, 4) . "<br>";
-
-/*
-3. Создать функцию, которая принимает одно число (10). В функции создать цикл, который будет увеличивать число в 10 раз и выводить его на экран.
-Когда число будет больше 1 000 000, на экране должно появляться сообщение, что вы достигли предела.
-1. Объявить функции
-2. Во входных параметрах должна быть 1 переменная
-3. Запустить цикл (например, while)
-4. В цикле сделать проверку на значение числа (не больше 1 000 000)
-5. Как только превысили 1 000 000, написать на экране сообщение */
-echo "<br>Задание 3 <br>";
-function thirdTaskLesson10($num)
-{
-    while ($num <= 1000000) {
-        $num *= 10;
-        echo "$num <br>";
-    }
-    echo "Предел достигнут! <br>";
-}
-thirdTaskLesson10(10);
-
-/*
-Слайд 14
-4. Создать функцию, в которой объявляется массив и случайными элементами.
-1. Объявить функции
-2. В функции объявить и проинициализировать массив случайными числами (размерность не важна) */
-echo "<br>Задание 4 <br>";
-function fourthTaskLesson10()
-{
-    $arr1 = [];
-    for ($i = 0; $i < 3; $i++) {
-        for ($j = 0; $j < 3; $j++) {
-            $arr1[$i][$j] = mt_rand(1, 10);
-        }
-    }
-    print_r($arr1);
-}
-fourthTaskLesson10();
-echo "<br>";
-
-/*
-5. Создать функцию, которая принимает массив и возвращает среднеарифметическое значение массива.
-1. Объявить и проинициализировать массив случайными числами (размерность не важна)
-2. Объявить функции
-3. Входной параметр функции - массив из п.1
-4. В функции запустить цикл, посчитать сумму всех элементов массива и количество элементов массива (не пользуемся встроенными функциями, пишем свою)
-5. Посчитать среднеарифметическое значение массива и вернуть его */
-echo "<br>Задание 5 <br>";
-function fifthTaskLesson10($arr) {
-    $length = 0;
-    $sum = 0;
-    foreach($arr as $value) {
-        $sum += $value;
-        $length++;
-    }
-    $average = $sum / $length;
-    return $average;
-}
-
-$arr2 = [];
-for ($i = 0; $i < 10; $i++) {
-    $arr2[$i] = mt_rand(1, 100);
-}
-print_r($arr2);
-echo "Среднеарифметическое равно " . fifthTaskLesson10($arr2) . "<br>";
-
-/*
-6.Создать функцию, которая принимает строку. Вернуть количество слов в строке. */
-echo "<br>Задание 6 <br>";
-function sixthTaskLesson10($str) {
-    return count(explode(' ', $str));
-}
-$message = "Мама мыла раму";
-echo "В строке '$message' " . sixthTaskLesson10($message) . " слов(а). <br>";
-
-/*
-7.Написать функцию, которая рассчитывает последовательность чисел Фибоначчи. */
-echo "<br>Задание 7<br>";
-function seventhTaskLesson10($n = 1) {
-    echo "Последовательность Фибоначчи для первых $n элементов: 0"; // <-- Сразу выводим всегда первый элемент
-    /*
-        fib1    0   1   1   2   3   <-- На каждом шаге (кроме 1-ого) выводим fib1 как текущий элемент последовательности
-        fib2    1   1   2   3   5
-        fibn    1   2   3   5   8
-    */
-    $fib1 = 0;
-    $fib2 = 1;
-        for ($i = 0, --$n; $i < $n; $i++) {
-            $fibn = $fib1 + $fib2;
-            $fib1 = $fib2;
-            $fib2 = $fibn;
-            echo ", $fib1";
-        }
-}
-seventhTaskLesson10(10);
-
-
-/*
-Слайд 15
-1. Создайте функцию, которая принимает одномерный массив и возвращает массив, заполненный случайными числами.
-2. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая определит количество слов строке.
-3. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выведет в обратном порядке буквы («XIRTIB ,PHP … »).
-4.Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выводит на экран длину строки.
-5. Дана строка «HTML, CSS, PHP, BITRIX». Написать функцию, которая выводит каждую букву на новую строку */
+Слайд 16
+1. Отправить логины и комментарии на почту (значения должны сохраняться вместо тестового документа на электронный адрес).
+*Так как мы отправляем e-mail на локальном сервере, то письма будут сохраняться в папку \OpenServer\userdata\temp\email
+2. Создайте форму авторизации. Зашифруйте пароли и отправьте их на сервер.
+3. Создайте анкету на форме. Ответ на каждый из вопросов представьте с помощью переключателя («да» или «нет»). По умолчанию задайте везде значение «да».
+Напишите сценарий обработки анкеты: поставьте 1 балл, если был ответ «да» в вопросах с номерами 3, 9, 10, 13, 14, 19 и «нет» в вопросах с номерами 1, 2, 4, 5, 6, 7, 8, 11, 12, 15, 16, 17, 18. Подсчитайте сумму набранных баллов:
+ - если она оказалась более 15, то результат: «У Вас покладистый характер»;
+ - если сумма в интервале от 8 до 15, то результат: «Вы не лишены недостатков, но с вами можно ладить»;
+ - если сумма менее 8 баллов, то результат: «Вашим друзьям можно посочувствовать».
+Отобразите на экране имя анкетируемого, фразу-результат анкетирования.
+*/
+?>
