@@ -1,5 +1,41 @@
+<?php
+/*  Это задание - настоящая муть! Слишком много очевидных и неочевидных условностей, которые влияют
+    на результат! Например, если я буду обновлять страницу, не выходя из нее после отправки данных с формы,
+    браузер будет каждый раз пересылать мой запрос снова и снова. Если же я выйду со страницы и снова зайду
+    на нее снова и начну также обновлять ее, то в данном случае браузер уже не будет пересылать данные с формы.
+    В общем, сделал - как сделал... */
+
+$arr_user = [
+    "Ann" => "123", // Имя и пароль
+    "Bob" => "456",
+    "Tom" => "789"
+];
+/*  Будем формировать куки только в случае успешной авторизации на странице.
+    Условие авторизации максимально упрощено, чтобы не отвлекаться от основной задачи. */
+if (count($_POST) == 2) {
+    if (($arr_user[$_POST["login"]] == $_POST["password"]) and ($_POST["password"])) {
+        $current_time = time(); // Сразу фиксируем время входа в PHP-код
+        /*  Каждый раз, посылая данные с формы, будем формировать куки на основе этих данных.
+            Кука "name" - является общей кукой для всех пользователей и содержит текущего авторизованного
+            пользователя. А вот две остальные куки: last_time_[user] и count_[user] должны быть индивидуальными
+            для каждого пользователя, иначе они будут затирать значения при смене пользователя при авторизации!*/
+        setcookie("name", $_POST["login"], time() + 3600 * 24 * 7 * 356);
+        setcookie("last_time_" . $_POST["login"], $current_time, $current_time + 60 * 60);
+        $name_count = "count_" . $_POST["login"];
+        /*  В случае если значение элемента массива $_COOKIE отвечающий за подсчет входов на страницу для
+            кокретного пользователя не установлено, т.е. пользователь заходит на страницу впервые, инициализируем
+            куку-счетчик нулевым значением. В противном случае инкрементируем ее значение...*/
+        if (isset($_COOKIE[$name_count])) {
+            setcookie($name_count, ++$_COOKIE[$name_count], time() + 3600 * 24 * 7 * 356);
+        }
+        else {
+            setcookie($name_count, 0, time() + 3600 * 24 * 7 * 356);
+        }
+    }
+}
+?>
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,42 +44,22 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" name="one">
-        <select name="year">
-            <?php
-                for ($i = 2010; $i <= 2022; $i++) {
-                    echo "<option value='$i'> $i </option>";
-                }
-            ?>
-        </select>
-    </form>
-
-    <form action="" method="post" name="two">
-        <p>
-            Логин <input name="login" type="text">
-        </p>
-        <p>
-            Пароль <input name="password" type="password">
-        </p>
-        <button type="submit">
-            Войти!
-        </button>
-    </form>
-
-    <?php
-    print_r($_POST);
-    $arr_passwd = [
-        "Виктор" => "698d51a19d8a121ce581499d7b701668", // md5-хэш для пароля 111
-        "Регина" => "bcbe3365e6ac95ea2c0343a2395834dd", // md5-хэш для пароля 222
-    ];
-    if ($_POST) {
-        if ($arr_passwd[$_POST["login"]] == md5($_POST["password"])) {
-            echo "<p> Добро пожаловать, " . $_POST["login"] . "!<br></p>";
-        }
-        else {
-            echo "<p>  Нет такого пользователя!<br></p>";
-        }
-    }
-    ?>
+<h3>Задание 12 - 3</h3>
+<form action="index.php" method="post">
+    <p>
+        Login: <input type="text" name="login">
+    </p><p>
+        Password: <input type="text" name="password">
+    </p>
+    <p>
+        <button type="submit">Войти!</button>
+    </p>
+</form>
+<?php
+if (isset($_COOKIE)) {
+        echo "Hello, " . $_COOKIE["name"] . "!<br>";
+        echo "Вы посетили наш сайт " . $_COOKIE["count_" . $_COOKIE["name"]] . " раз!";
+}
+?>
 </body>
 </html>
