@@ -1,8 +1,5 @@
 <?php
-    $time = time();
     session_start();
-    $_SESSION['login'] = $_GET['login'];
-    $_SESSION['time'] = $time;
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,17 +11,11 @@
     <title>Document</title>
 </head>
 <body>
-<h1>index1.php</h1>
-<p>
-<form action="" method="get">
-    <p>
-        Ваше имя <input type="text" name="login">
-    </p>
-    <p>
-        <button type="submit">Отправить!</button>
-    </p>
-</form>
-<a href="hello.php"> hello.php</a>
-</p>
+    <?php
+        echo "Привет, " . $_SESSION['login'] . "<br>";
+        echo "Время входа на сайт:" . date("H:i:s", $_SESSION['time'] . "<br>");
+        $diff = time() - $_SESSION['time'];
+        echo "<br> Разница между текущим временем и временем входа: " . $diff . " c.";
+        ?>
 </body>
 </html>
